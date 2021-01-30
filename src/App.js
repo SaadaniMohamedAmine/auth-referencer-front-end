@@ -1,23 +1,29 @@
 import logo from './logo.svg';
 import './App.css';
-
+import {BrowserRouter as Router,Route,Switch} from 'react-router-dom'
+import Navbar from './pages/Navbar.js'
+import Home from './pages/Home'
+import Register from './pages/Register'
+import Login from './pages/Login' 
+import Feed from './pages/Feed'
+import PrivateRoute from './privateRoute';
+//the Route will replace the BrowserRouter and it is considered as
+//the major component in routing 
+//everything in routing must be in Router(BrowserRouter)
+//routes must be included in Switch element
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router> 
+        {/*For every Route,we will display a component */}
+        <Navbar />
+        <Switch>
+          <Route exact path='/' component={Home}/>
+          <Route path='/register' component={Register}/>
+          <Route path='/login' component={Login}/>
+          <PrivateRoute path='/feed' component={Feed} />
+        </Switch>
+      </Router>
     </div>
   );
 }
